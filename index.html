@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Top Ocean People</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      line-height: 1.6;
+    }
+
+    body::-webkit-scrollbar {
+      display: none;
+    }
+
+    nav {
+      background-color: black;
+      color: white;
+      padding: 20px;
+      position: fixed;
+      width: 100%;
+      top: 0;
+      left: 0;
+      z-index: 1000;
+    }
+
+    nav .container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 1rem;
+    }
+
+    nav .logo {
+      font-size: 1.5rem;
+      color: #fff;
+      text-decoration: none;
+    }
+
+nav .nav-links li a {
+  position: relative;
+  color: white;
+  text-decoration: none;
+  font-size: 1rem;
+  transition: color 0.3s ease;
+}
+
+nav .nav-links li a::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -4px;
+  width: 100%;
+  height: 2px;
+  background:lightgray;
+  transform: scaleX(0);
+  transform-origin: left;
+  opacity: 0;
+  transition: transform 0.4s ease, opacity 0.4s ease;
+}
+
+nav .nav-links li a:hover::after {
+  transform: scaleX(1);
+  opacity: 1;
+}
+    nav .nav-links {
+      display: flex;
+      list-style: none;
+      gap: 1.5rem;
+    } 
+    nav .nav-links li {
+      position: relative;
+    }
+    nav .nav-links li a {
+      color: white;
+      text-decoration: none;
+      font-size: 1rem;
+      transition: color 0.3s ease;
+    }
+
+
+
+    .menu-icon {
+      display: none;
+      flex-direction: column;
+      cursor: pointer;
+    }
+
+    .menu-icon .bar {
+      width: 25px;
+      height: 3px;
+      margin: 4px 0;
+      background-color: white;
+      transition: all 0.3s ease;
+    }
+
+    .menu-icon.active .bar:nth-child(1) {
+      transform: rotate(45deg) translate(5px, 5px);
+    }
+
+    .menu-icon.active .bar:nth-child(2) {
+      opacity: 0;
+    }
+
+    .menu-icon.active .bar:nth-child(3) {
+      transform: rotate(-45deg) translate(6px, -6px);
+    }
+
+    @media (max-width: 768px) {
+      nav .nav-links {
+        display: none;
+        flex-direction: column;
+        position: absolute;
+        top: 70px;
+        left: 0;
+        width: 100%;
+        background-color: darkblue;
+        text-align: center;
+        padding: 1rem 0;
+      }
+
+      nav .nav-links.active {
+        display: flex;
+      }
+
+      .menu-icon {
+        display: flex;
+      }
+    }
+
+    section {
+      min-height: 100vh;
+      padding: 100px 20px 60px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      text-align: center;
+    }
+
+    #hero {
+      background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)),
+        url('https://static.vesselfinder.net/ship-photo/8031160-0-ab5bd3f2d4ea46a0cb40bf7af8129218/1?v1') center/cover no-repeat;
+      color: white;
+    }
+
+    #hero h2 {
+      font-size: 2.2rem;
+      margin-bottom: 1rem;
+    }
+
+    #hero .btn {
+      background: white;
+      color: black;
+      padding: 0.75rem 1.5rem;
+      border-radius: 25px;
+      text-decoration: none;
+      font-weight: bold;
+      transition: 0.3s;
+    }
+
+    #hero .btn:hover {
+      background: #e6e6e6;
+    }
+
+    #about, #contact {
+      background: #fff;
+    }
+
+    #about h3, #contact h2 {
+      font-size: 2rem;
+      margin-bottom: 2rem;
+    }
+
+    .about-list, .contact-content {
+      display: flex;
+      gap: 2rem;
+      flex-wrap: wrap;
+      justify-content: center;
+      width: 100%;
+      max-width: 1000px;
+      margin: auto;
+    }
+
+    .about-box {
+      flex: 1 1 300px;
+      background: #f0f0f0;
+      padding: 1.5rem;
+      border-radius: 8px;
+    }
+
+    .about-images {
+  display: flex;
+  justify-content: space-around;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin-top: 2rem;
+}
+
+.about-images img {
+  width: 30%;
+  height: auto;
+  border-radius: 8px;
+  object-fit: cover;
+}
+
+/* RESPONSIVE untuk layar kecil */
+@media (max-width: 768px) {
+  .about-images {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .about-images img {
+    width: 80%;
+  }
+}
+
+
+
+    footer {
+      background-color: #1e1e2f;
+      color: white;
+      text-align: center;
+      padding: 1rem;
+    }
+
+    @media (max-width: 600px) {
+      nav .logo {
+        font-size: 1.2rem;
+      }
+
+      #hero h2 {
+        font-size: 1.8rem;
+      }
+
+      .about-box {
+        flex: 1 1 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAVIGATION -->
+  <nav>
+    <div class="container">
+      <a class="logo" href="#hero">Top Ocean People</a>
+      <ul class="nav-links">
+        <li><a href="#hero">Home</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+      <div class="menu-icon" id="menu-icon">
+        <span class="bar"></span>
+        <span class="bar"></span>
+        <span class="bar"></span>
+      </div>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section id="hero">
+    <div class="container">
+      <h2>Welcome to Top Ocean People</h2>
+      <h3>We grow and manage outstanding crew by offering equal opportunities and fair treatment</h3>
+      <p>Your journey to awesome starts here.</p><br>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section id="about">
+    <div class="container">
+      <h3>About</h3>
+      <div class="about-list">
+        <div class="about-box">
+          <h4><b>Vision:</b></h4>
+          <p>To be a leader in the shipping industry by providing innovative and high quality services.</p>
+        </div>
+        <div class="about-box">
+          <h4><b>Mission:</b></h4>
+          <p>We are committed to providing effective and efficient solutions in recruitment and human 
+            resource management, and supporting our clients' growth through customized services.</p>
+        </div>
+        <div class="about-box">
+          <h4><b>Company History:</b></h4>
+          <p>We are committed to providing effective and efficient solutions in recruitment and human resource
+             management, and supporting our clients' growth through customized services.</p>
+        </div>
+
+        <h2><b>Here are some photos of the ships working together</b></h2>
+        <div class="about-images">
+           <img src="image/black.jpg" alt="yellow">
+            <img src="image/blue.jpg" alt="blue">
+            <img src="image/red.jpg" alt="white">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact">
+    <div class="container">
+      <h2>Contact Us</h2>
+      <div class="contact-content">
+        <div class="about-box">
+          <h4>Email📧</h4>
+          <p><a href="mailto:topjakindo@yahoo.co.id">topjakindo@yahoo.co.id</a></p>
+        </div>
+        <div class="about-box">
+          <h4>Phone☎️</h4>
+          <p>(021) 4227917</p>
+        </div>
+          <div class="about-box">
+        <h4>Address🗺️</h4>
+        <p>Jl. Sumur Batu Raya No 4 Kel. Sumur Batu Kemayoran Jakarta Pusat , Indonesia</p>
+      </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <p>&copy; 2025 Top Ocean People. All rights reserved.</p>
+  </footer>
+
+  <!-- JAVASCRIPT -->
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      const menuIcon = document.querySelector('.menu-icon');
+      const navLinks = document.querySelector('.nav-links');
+
+      menuIcon.addEventListener('click', function () {
+        navLinks.classList.toggle('active');
+        menuIcon.classList.toggle('active');
+      });
+
+      document.addEventListener('click', function (e) {
+        if (!menuIcon.contains(e.target) && !navLinks.contains(e.target)) {
+          navLinks.classList.remove('active');
+          menuIcon.classList.remove('active');
+        }
+      });
+
+      document.querySelectorAll('.nav-links a').forEach(link => {
+        link.addEventListener('click', () => {
+          navLinks.classList.remove('active');
+          menuIcon.classList.remove('active');
+        });
+      });
+    });
+  </script>
+</body>
+</html>
